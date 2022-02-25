@@ -1,0 +1,177 @@
+﻿@model SistemTicket.Models.ticket.tbTicket
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+ 
+<div class="panel panel-primary">
+    <div class="panel-heading">Ingreso de Usuario</div>
+
+    @*Buscar a la persona por cedula*@
+
+
+
+
+
+
+
+<div class="form-horizontal">
+
+
+    <hr />
+    <div class="form-group">
+        <label class="control-label col-md-2">Ingrese la cedula de la Persona</label>
+        <div class="col-md-10">
+            <input type="text" id="txtName" class="form-control" />
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2"></label>
+        <div class="col-md-10">
+            <input type="button" id="btnGet" class="btn btn-warning" value="Buscar" />
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2"></label>
+        <div class="col-md-10">
+            <p id="nombresPersona">  <span></span></p>
+
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Ingreseel asunto</label>
+        <div class="col-md-10">
+            <input type="text" id="txtasunto" class="form-control" />
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Ingrese la Descripción</label>
+        <div class="col-md-10">
+            <input type="text" id="txtdesxripxion" class="form-control" />
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Ingrese la Descripción</label>
+        <div class="col-md-10">
+            <div class="alert alert-success alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <p id="alerta">  <span></span></p>
+                
+            </div>
+
+        </div>
+    </div>
+     
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="button" id="btnenviar" data-loading-text="Loading..." class="btn btn-primary">
+                Generar Ticket
+            </button>
+            @*<input type="submit" value="Create" id="btnenviar" class="btn btn-default" />*@
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            @Html.ActionLink("Back to List", "Index", new { }, new { @class = "btn btn-primary" })
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript">
+    var id_paciente = 0;
+        $(function () {
+            $("#btnGet").click(function () {
+                var $btn = $(this).button('loading');
+                // business logic...
+                $btn.button('reset');
+                $.get("/tbPersonas/BuscarCedula",
+                    { cedula: $("#txtName").val() },
+                    function (response) {
+                        if (response != 0) {
+                            id_paciente = response[0].id;
+                            console.log(response[0].nombres);
+                            $("#id_persona").val(id_paciente);
+                            $("#nombresPersona").text(response[0].nombres + ' ' + response[0].apellidos);
+                            
+                            console.log(id_paciente);
+                          
+                        } else {
+                            $("#nombresPersona").text("No se encontro la persona");
+                        }
+
+                      
+                    }
+                );
+              
+            });
+        });
+
+
+    $(function () {
+        $("#btnenviar").click(function () {
+           
+            if (id_paciente == 0) {
+                $("#alerta").text("Debe consultar el nombre de la persona " );
+                return;
+
+            }
+            if ($("#txtasunto").val() == "") {
+                $("#alerta").text("Debe ingresar el asunto " );
+                return;
+
+            }
+            if ($("#txtdesxripxion").val() == "") {
+                $("#alerta").text("Debe ingresar la descripcion");
+                return;
+
+            }
+            $.post("/tbTickets/Create",
+                {
+                    id_persona: id_paciente,
+                    id_estado_ticket: 1,
+                    asunto: $("#txtasunto").val(),
+                    descripcion: $("#txtdesxripxion").val(),
+                    user_ingreso:1,
+                    user_modificacion:1
+
+                },
+                function (response) {
+                    console.log(response);
+                    if (response != 0) {
+                        
+
+                        console.log(response);
+                        
+                        $("#alerta").text("Su ticket fue generado de maner exitosa, el numero de Ticket es : "+ response.id);
+                        
+                    } else {
+                        $("#nombresPersona").text("No se encontro la persona");
+                        $("#alerta").text("Error al generar ticke " + response);
+
+                    }
+
+
+                }
+            );
+        });
+    });
+</script>

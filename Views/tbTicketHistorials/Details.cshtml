@@ -1,0 +1,47 @@
+﻿@model SistemTicket.Models.ticket.tbTicket
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<div class="panel panel-primary">
+    <div class="panel-heading">Detalles de Usuario</div>
+
+
+    <div class="panel-body">
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.id_usuario)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.id_usuario)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.comentario)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.comentario)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.tbTicket1.asunto)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.tbTicket1.asunto)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</div>
+</div>

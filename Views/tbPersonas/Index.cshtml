@@ -1,0 +1,66 @@
+﻿@model IEnumerable<SistemTicket.Models.Persona.tbPersona>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<div class="panel panel-primary">
+    <div class="panel-heading">Detalles de Persona</div>
+
+
+    <div class="panel-body">
+        
+        </p>
+        <table class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.cedula)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.nombres)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.apellidos)
+                </th>
+                @*<th>
+                    @Html.DisplayNameFor(model => model.user_ingreso)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.user_modificacion)
+                </th>*@
+                <th >Acciones</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.cedula)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.nombres)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.apellidos)
+                    </td>
+                    @*<td>
+                        @Html.DisplayFor(modelItem => item.user_ingreso)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.user_modificacion)
+                    </td>*@
+                <td style="width:30%">
+                    @Html.ActionLink("Editar", "Edit", new { id = item.id }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Detalles", "Details", new { id = item.id }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.id }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Nuevo", "Create", new { }, new { @class = "btn btn-primary" })
+
+                </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>

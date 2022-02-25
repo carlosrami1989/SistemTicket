@@ -1,0 +1,59 @@
+﻿@model SistemTicket.Models.Persona.tbPersona
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="panel panel-primary">
+    <div class="panel-heading">Detalles Usuario</div>
+    <div class="panel-body">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.cedula)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.cedula)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.nombres)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.nombres)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.apellidos)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.apellidos)
+            </dd>
+
+            @*<dt>
+                @Html.DisplayNameFor(model => model.user_ingreso)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.user_ingreso)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.user_modificacion)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.user_modificacion)
+            </dd>*@
+
+        </dl>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.id }, new { @class = "btn btn-success" })
+            @Html.ActionLink("Back to List", "Index", new { }, new { @class = "btn btn-primary" })
+        </p>
+    </div>
+    </div>
+
+</div>

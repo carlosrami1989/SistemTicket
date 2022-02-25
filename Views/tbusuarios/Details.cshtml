@@ -1,0 +1,58 @@
+﻿@model SistemTicket.Models.Usuario.tbusuario
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="panel panel-primary">
+    <div class="panel-heading">Detalles Usuario</div>
+
+
+
+
+    <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.apellidos)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.usuario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.password)
+            </th>
+        </tr>
+        <tr>
+            <td>
+                <dd>
+                    @Html.DisplayFor(model => model.nombre)
+                </dd>
+            </td>
+            <td>
+                <dd>
+                    @Html.DisplayFor(model => model.apellidos)
+                </dd>
+            </td>
+            <td>
+                <dd>
+                    @Html.DisplayFor(model => model.usuario)
+                </dd>
+            </td>
+            <td>
+                <dd>
+                    @Html.DisplayFor(model => model.password)
+                </dd>
+            </td>
+        </tr>
+    </table>
+
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Back to List", "Index", new { }, new { @class = "btn btn-primary" })
+</p>
+ 
+
